@@ -1,0 +1,163 @@
+body{
+    overflow:hidden;
+    background-color: #343a40;
+}
+p{
+    padding:0;
+    margin:0;
+    padding-right: 30px;
+    text-align: center;
+}
+.container-fluid{
+    width: 100vw;
+    height: 100vh;
+    min-width:1200px;
+    min-height:800px;
+    padding: 0;
+}
+
+.btn{
+    float: right;
+    transform: translate(-10%,12.5%);
+}
+
+#todo-heading {
+    background-color: orange;
+    align-items:center;
+}
+#doing-heading {
+    background-color: yellow;
+}
+#done-heading {
+    background-color: green;
+}
+
+#todo,#doing,#done {
+    transform: translateY(0vh);
+    height: 88.5vh;
+    overflow: show;
+    overflow-y: scroll;
+}
+*::-webkit-scrollbar {
+    width: 2px;
+}
+*::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 0px;
+}
+.delete{
+    padding:5px;
+    transform: translate(-2px,1.5px);
+    background-image: url(../img/trash.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: green;
+    height:30px;
+    width:30px;
+    min-height: auto;
+    min-width: auto;
+}
+
+.card{
+    min-height: 35px;
+    width:100%;
+    margin-left: 2.5px;
+    margin-right: 2.5px;
+    margin-bottom: 5px;
+}
+
+.add{
+    padding:5px;
+    transform: translate(30%,25%);
+    background-image: url(../img/plus.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height:30px;
+    width:30px;
+    min-height: auto;
+    min-width: auto;
+
+}
+
+.btn {
+    margin:0;
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 3px 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+.btn:hover {
+    background-color: RoyalBlue;
+}
+
+.shadow{
+    -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 1);
+    -moz-box-shadow:    0px 0px 30px 0px rgba(0, 0, 0, 1);
+    box-shadow:         0px 0px 30px 0px rgba(0, 0, 0, 1);
+}
+
+.high{
+    background-color:rgba(252, 12, 12, 0.6);
+}
+
+.moderate {
+    background-color:rgba(252, 244, 12, 0.6)
+}
+
+.low{
+    background-color:rgba(12, 252, 60, 0.6)
+}
+
+.none{
+    background-color: rgba(255, 255, 255,0.6);
+}
+
+#projectName{
+    font-size: 20px;
+    min-width:823px;
+    min-height:37px;
+    margin-right:10px;
+    border-style:solid;
+    border-width: 1px;
+    border-color:black;
+    border-radius:0px;
+    background-color: rgb(219, 219, 219)
+
+}
+.navbar{
+    width:100%;
+    height:50px;
+    margin-bottom: 5px;
+}
+
+.unlocked{
+    background-image: url(../img/unlock.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: green;
+    height:30px;
+    width:30px;
+    min-height: auto;
+    min-width: auto;
+}
+.locked{
+    background-image: url(../img/lock.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: red;
+    height:30px;
+    width:30px;
+    min-height: auto;
+    min-width: auto;
+    }
+
+*:focus{
+    outline:none
+}

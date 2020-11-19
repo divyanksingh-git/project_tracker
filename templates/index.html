@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css') }}" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Todo</title>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+      <div class ="row">
+        <nav class="navbar navbar-dark bg-dark navbar navbar-dark bg-dark">
+          <span>
+          {% if project|length < 1 %}
+          <input type = "text" id="projectName" onchange="sendProjectData()" placeholder="Enter Project Name (Max Length - 50)" maxlength="50" >
+          <button id="lockBtn" onclick="lock()" type="button" class="btn unlocked"></button>
+          {% else %}
+          <input type = "text" id="projectName" onchange="sendProjectData()" placeholder="Enter Project Name (Max Length - 50)" maxlength="50" value="{{project[1]}}" >
+          <button id="lockBtn" onclick="lock()" type="button" class="{{project[2]}}"></button>
+          {% endif %}
+          </span>
+          <button onclick="clearAll()" type="button" class="btn clear">Clear All</button>
+        </nav> 
+      </div>
+      <div class="row">
+  
+        <div class="col-4 ">
+          <div id="todo-heading" class="col-12 m-auto">
+            <h1>Things To Do<button onclick="assignId('todo')" type="button" class="btn add" data-toggle="modal" data-target=#addModal></button></h1>  
+          </div>
+        </div>
+          
+        <div class="col-4">
+          <div id="doing-heading" class="col-12 m-auto">
+            <h1>Doing<button onclick="assignId('doing')" type="button" class="btn add" data-toggle="modal" data-target=#addModal></h1>
+          </div>
+        </div>
+          
+        <div class="col-4">
+          <div  id ="done-heading" class="col-12 m-auto">
+            <h1>Done<button onclick="assignId('done')" type="button" class="btn add" data-toggle="modal" data-target=#addModal></button></h1>
+          </div>
+        </div>
+          
+      </div>
+        <div class="row">
+          
+          <div class="col-4">
+            <div id="todo" class="col-12 m-auto">
+            {% if todo|length > 0 %}
+            {% for i in todo %}
+            <div class ="{{i[2]}}" id="{{i[0]}}" draggable="true">
+              <h5><button class ="btn delete" onclick=delElement(this)></button><p class ="title">{{i[3]}}</p></h5>
+              <p class = "description">{{i[4]}}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            </div>
+          </div>
+          <div class="col-4">
+            <div id="doing" class="col-12 m-auto">
+            {% if doing|length > 0 %}
+            {% for i in doing %}
+            <div class ="{{i[2]}}" id="{{i[0]}}" draggable="true">
+              <h5><button class ="btn delete" onclick=delElement(this)></button><p class ="title">{{i[3]}}</p></h5>
+              <p class = "description">{{i[4]}}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            </div>
+          </div>
+          
+          <div class="col-4">
+            <div  id ="done" class="col-12 m-auto">
+            {% if done|length > 0 %}
+            {% for i in done %}
+            <div class ="{{i[2]}}" id="{{i[0]}}" draggable="true">
+              <h5><button class ="btn delete" onclick=delElement(this)></button><p class ="title">{{i[3]}}</p></h5>
+              <p class = "description">{{i[4]}}</p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Task</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class = "form-group">
+                <lable for="title">Title</lable>
+                <input type="text" class="form-control" id="title" placeholder="Title (Max Length :- 50)" maxlength="50">
+              </div>
+              <div class = "form-group">
+                <lable for="description">Description</lable>
+                <textarea class="form-control" id="description" placeholder="Description (Max Length :- 1000)" maxlength="1000"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="selectPriority">Select Priority:</label>
+                <select class="form-control" id="priority">
+                  <option value="none" class="none">No Priority</option>
+                  <option value="low" class="low">Low Priority</option>
+                  <option value="moderate" class="moderate">Moderate Priority</option>
+                  <option value="high" class="high">High Priority</option>
+                </select>
+              </div> 
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" onclick="initiateAdd()" class="btn btn-primary" data-dismiss="modal">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{ url_for('static',filename='script/jquery-3.3.1.slim.min.js') }}" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='script/popper.min.js') }}" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='script/bootstrap.min.js') }}" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static',filename='script/script.js') }}"></script>
+{% endblock %}
