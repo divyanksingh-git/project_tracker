@@ -77,8 +77,8 @@ def createProjectTable(cursor):
 
 db = mysql.connector.connect(
     host="localhost",
-    user="demon",
-    passwd="demon",
+    user="change me",
+    passwd="change me",
     database="Tasks"
 )
 cursor = db.cursor()
