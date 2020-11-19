@@ -1,6 +1,6 @@
 # trello_clone
 
-It uses sql to save data and was configured according to my local machine, to use this program change sql usename and password in main.py
+It uses sql to save data and was configured according to my local machine, to use this program change sql usename and password in main.py and create a new database "Tasks"
 
 Use it in private mode of web browser
 
