@@ -29,7 +29,7 @@ def deleteDb(id,cursor):
     id = '"'+id+'"'
     cursor.execute("DELETE FROM tasks WHERE ID = "+id+"")
     db.commit()
-    return 0 
+    return 0
 
 def clearDb(cursor):
     cursor.execute("DROP TABLE tasks")
@@ -86,32 +86,18 @@ cursor = db.cursor()
 createTasksTable(cursor)
 createProjectTable(cursor)
 
-cursor.execute("SELECT * FROM tasks")
-tasks = cursor.fetchall()
-
-cursor.execute("SELECT * FROM project")
-project = cursor.fetchall()
-
-if len(project) == 0:
-    project =[]
-else:
-    project = project[0]
-todo = []
-doing = []
-done = []
-
-for task in tasks:
-    if task[1] == "todo":
-        todo.append(task)
-    if task[1] == "doing":
-        doing.append(task)
-    if task[1] == "done":
-        done.append(task)
 
 app = Flask(__name__)
 
-@app.route('/',methods=['POST','GET'])
+@app.after_request
+def add_header(r):
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
+@app.route('/',methods=['POST','GET'])
 
 def index():
     if request.method == "POST":
@@ -123,7 +109,7 @@ def index():
         dataClasslist = data["classlist"]
         dataTitle = data["title"]
         dataDescription = data["description"]
-        
+
         if dataType == "add":
             addDb(dataId,dataContainer,dataClasslist,dataTitle,dataDescription,cursor)
         elif dataType == "modify":
@@ -134,9 +120,31 @@ def index():
             clearDb(cursor)
         elif dataType == "project":
             addProject(0,dataTitle,dataClasslist,cursor)
-
-        return "0"
+        return redirect('/')
     else:
+        cursor.execute("SELECT * FROM tasks")
+        tasks = cursor.fetchall()
+
+        cursor.execute("SELECT * FROM project")
+        project = cursor.fetchall()
+
+        if len(project) == 0:
+            project =[]
+        else:
+            project = project[0]
+        todo = []
+        doing = []
+        done = []
+
+        for task in tasks:
+            if task[1] == "todo":
+                todo.append(task)
+            if task[1] == "doing":
+                doing.append(task)
+            if task[1] == "done":
+                done.append(task)
+
         return render_template('index.html',project=project,todo=todo,doing=doing,done=done)
 
 app.run()
+
