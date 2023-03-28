@@ -15,8 +15,9 @@ It also implements persistence storage using SQL database, so your list items wi
 
 ![Prototyping presentation (1)](https://user-images.githubusercontent.com/26967154/228234212-75064bf4-2e9d-494c-a950-bf05d006b5a9.jpg)
 
-![Prototyping presentation (2)](https://user-images.githubusercontent.com/26967154/228234234-26c70928-683d-4a17-adf6-2e5f7b3ac40b.jpg)
+![Prototyping presentation (2)](https://user-images.githubusercontent.com/26967154/228235502-19375ba2-e193-4211-8964-e050c144f592.jpg)
 
-![Prototyping presentation (3)](https://user-images.githubusercontent.com/26967154/228234245-aa254c18-e170-4e1b-a00f-635cf912aef5.jpg)
+![Prototyping presentation (3)](https://user-images.githubusercontent.com/26967154/228235523-eb5de423-0dbd-4882-9455-0894953096d3.jpg)
+
 
 ![Prototyping presentation (4)](https://user-images.githubusercontent.com/26967154/228234261-213fd438-d6fe-427b-989e-23f99d927526.jpg)
